@@ -31,8 +31,9 @@ jobs:
       # run tests!
       - run: mvn -e integration-test
 
-      - run: mvn clean package
+      # package
+      - run: mvn clean package -Dbuild=$CIRCLE_BUILD_NUM
 
       - store_artifacts:
-          path: target
+          path: deploy
 
