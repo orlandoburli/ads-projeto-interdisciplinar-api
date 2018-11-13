@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.builder.ProfessorBuilder;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.builder.UsuarioBuilder;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.exceptions.BusinessException;
 
@@ -16,8 +17,16 @@ public class DadosResources {
 	@Autowired
 	private UsuarioBuilder usuarioBuilder;
 
+	@Autowired
+	private ProfessorBuilder professorBuilder;
+
 	@GetMapping("/usuarios/{quantidade}")
 	public void gerarUsuarios(@PathVariable int quantidade) throws BusinessException {
 		this.usuarioBuilder.createUsuarios(quantidade);
+	}
+
+	@GetMapping("/professores/{quantidade}")
+	public void gerarProfessores(@PathVariable int quantidade) throws BusinessException {
+		this.professorBuilder.createProfessores(quantidade);
 	}
 }

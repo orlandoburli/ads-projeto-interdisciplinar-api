@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class UsuarioDTO implements Serializable {
+public class DisciplinaDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,11 +15,7 @@ public class UsuarioDTO implements Serializable {
 
 	private String nome;
 
-	private String email;
-
-	private String cpf;
-
-	private String senha;
+	private Integer cargaHoraria;
 
 	public Integer getId() {
 		return this.id;
@@ -37,28 +33,11 @@ public class UsuarioDTO implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return this.email;
+	public Integer getCargaHoraria() {
+		return this.cargaHoraria;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCargaHoraria(Integer cargaHoraria) {
+		this.cargaHoraria = cargaHoraria;
 	}
-
-	public String getCpf() {
-		return this.cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getSenha() {
-		return this.senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 }

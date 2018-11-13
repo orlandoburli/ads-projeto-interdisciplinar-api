@@ -12,32 +12,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.dto.UsuarioDTO;
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.requests.UsuarioConsultaRequest;
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.service.UsuarioService;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.dto.CursoDTO;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.dto.DadosDTO;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.requests.CursoConsultaRequest;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.service.CursoService;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.exceptions.BusinessException;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.geral.ConsultaResponse;
 
 @RestController
-@RequestMapping("/usuario/v1")
-public class UsuarioResource {
+@RequestMapping("/curso/v1")
+public class CursoResource {
 
 	@Autowired
-	private UsuarioService service;
+	private CursoService service;
 
 	@GetMapping("{id}")
-	public Optional<UsuarioDTO> get(@PathVariable Integer id) {
+	public Optional<CursoDTO> get(@PathVariable Integer id) {
 		return this.service.get(id);
 	}
 
 	@PostMapping
-	public UsuarioDTO inserir(@RequestBody UsuarioDTO usuario) throws BusinessException {
-		return this.service.insert(usuario);
+	public CursoDTO inserir(@RequestBody CursoDTO curso) throws BusinessException {
+		return this.service.insert(curso);
 	}
 
 	@PutMapping
-	public UsuarioDTO atualizar(@RequestBody UsuarioDTO usuario) throws BusinessException {
-		return this.service.update(usuario);
+	public CursoDTO atualizar(@RequestBody CursoDTO curso) throws BusinessException {
+		return this.service.update(curso);
 	}
 
 	@DeleteMapping("{id}")
@@ -45,8 +46,13 @@ public class UsuarioResource {
 		this.service.delete(id);
 	}
 
+	@GetMapping("dados")
+	public DadosDTO dados() {
+		return this.service.getDados();
+	}
+
 	@PostMapping("pesquisar")
-	public ConsultaResponse<UsuarioDTO> pesquisar(@RequestBody UsuarioConsultaRequest request) {
+	public ConsultaResponse<CursoDTO> pesquisar(@RequestBody CursoConsultaRequest request) {
 		return this.service.pesquisar(request);
 	}
 }

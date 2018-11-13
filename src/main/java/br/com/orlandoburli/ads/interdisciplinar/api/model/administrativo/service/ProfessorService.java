@@ -12,19 +12,19 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.dto.UsuarioDTO;
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.entities.Usuario;
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.repositories.UsuarioRepository;
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.requests.UsuarioConsultaRequest;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.dto.ProfessorDTO;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.entities.Professor;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.repositories.ProfessorRepository;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.requests.ProfessorConsultaRequest;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.exceptions.BusinessException;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.geral.ConsultaResponse;
 import br.com.orlandoburli.ads.interdisciplinar.api.utils.ValidatorUtils;
 
 @Service
-public class UsuarioService {
+public class ProfessorService {
 
 	@Autowired
-	private UsuarioRepository repository;
+	private ProfessorRepository repository;
 
 	@Autowired
 	private ConversionService conversionService;
@@ -32,43 +32,43 @@ public class UsuarioService {
 	@Autowired
 	private ValidatorUtils utils;
 
-	private Usuario insert(Usuario u) throws BusinessException {
+	private Professor insert(Professor u) throws BusinessException {
 		this.utils.validate(u);
 
 		return this.repository.save(u);
 	}
 
-	public UsuarioDTO insert(UsuarioDTO usuario) throws BusinessException {
-		return this.conversionService.convert(this.insert(this.conversionService.convert(usuario, Usuario.class)),
-				UsuarioDTO.class);
+	public ProfessorDTO insert(ProfessorDTO usuario) throws BusinessException {
+		return this.conversionService.convert(this.insert(this.conversionService.convert(usuario, Professor.class)),
+				ProfessorDTO.class);
 	}
 
-	private Usuario update(Usuario u) throws BusinessException {
+	private Professor update(Professor u) throws BusinessException {
 		this.utils.validate(u);
 
 		return this.repository.save(u);
 	}
 
-	public UsuarioDTO update(UsuarioDTO usuario) throws BusinessException {
-		return this.conversionService.convert(this.update(this.conversionService.convert(usuario, Usuario.class)),
-				UsuarioDTO.class);
+	public ProfessorDTO update(ProfessorDTO usuario) throws BusinessException {
+		return this.conversionService.convert(this.update(this.conversionService.convert(usuario, Professor.class)),
+				ProfessorDTO.class);
 	}
 
 	public void delete(Integer id) {
 		this.repository.findById(id).ifPresent(u -> this.repository.delete(u));
 	}
 
-	public Optional<UsuarioDTO> get(Integer id) {
-		final Optional<Usuario> op = this.repository.findById(id);
+	public Optional<ProfessorDTO> get(Integer id) {
+		final Optional<Professor> op = this.repository.findById(id);
 
 		if (op.isPresent()) {
-			return Optional.of(this.conversionService.convert(op.get(), UsuarioDTO.class));
+			return Optional.of(this.conversionService.convert(op.get(), ProfessorDTO.class));
 		}
 
 		return Optional.empty();
 	}
 
-	public ConsultaResponse<UsuarioDTO> pesquisar(UsuarioConsultaRequest request) {
+	public ConsultaResponse<ProfessorDTO> pesquisar(ProfessorConsultaRequest request) {
 		final String filtroString = ("%" + (request.getFiltro() == null ? "" : request.getFiltro().trim()) + "%")
 				.replace(" ", "%").toUpperCase();
 
@@ -77,13 +77,14 @@ public class UsuarioService {
 
 		final String ordenar = StringUtils.isEmpty(request.getOrdenar()) ? "nome" : request.getOrdenar();
 
-		final Page<Usuario> page = this.repository.findByNomeOrEmailOrCpf(filtroString,
+		final Page<Professor> page = this.repository.findByNomeOrEmailOrCpf(filtroString,
 				PageRequest.of(request.getPageNumber(), request.getPageSize(), Sort.by(direction, ordenar)));
 
 		return new ConsultaResponse<>(page.getContent().stream().map(a -> {
-			final UsuarioDTO dto = this.conversionService.convert(a, UsuarioDTO.class);
+			final ProfessorDTO dto = this.conversionService.convert(a, ProfessorDTO.class);
 			dto.setSenha(null);
 			return dto;
 		}).collect(Collectors.toList()), page.getTotalElements(), page.getTotalPages());
 	}
+
 }

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class UsuarioDTO implements Serializable {
+public class ProfessorDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

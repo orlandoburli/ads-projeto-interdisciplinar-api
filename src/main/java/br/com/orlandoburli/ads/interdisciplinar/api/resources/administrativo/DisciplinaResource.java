@@ -12,32 +12,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.dto.UsuarioDTO;
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.requests.UsuarioConsultaRequest;
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.service.UsuarioService;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.dto.DisciplinaDTO;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.requests.DisciplinaConsultaRequest;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.service.DisciplinaService;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.exceptions.BusinessException;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.geral.ConsultaResponse;
 
 @RestController
-@RequestMapping("/usuario/v1")
-public class UsuarioResource {
+@RequestMapping("/disciplina/v1")
+public class DisciplinaResource {
 
 	@Autowired
-	private UsuarioService service;
+	private DisciplinaService service;
 
 	@GetMapping("{id}")
-	public Optional<UsuarioDTO> get(@PathVariable Integer id) {
+	public Optional<DisciplinaDTO> get(@PathVariable Integer id) {
 		return this.service.get(id);
 	}
 
 	@PostMapping
-	public UsuarioDTO inserir(@RequestBody UsuarioDTO usuario) throws BusinessException {
-		return this.service.insert(usuario);
+	public DisciplinaDTO inserir(@RequestBody DisciplinaDTO disciplina) throws BusinessException {
+		return this.service.insert(disciplina);
 	}
 
 	@PutMapping
-	public UsuarioDTO atualizar(@RequestBody UsuarioDTO usuario) throws BusinessException {
-		return this.service.update(usuario);
+	public DisciplinaDTO atualizar(@RequestBody DisciplinaDTO disciplina) throws BusinessException {
+		return this.service.update(disciplina);
 	}
 
 	@DeleteMapping("{id}")
@@ -46,7 +46,7 @@ public class UsuarioResource {
 	}
 
 	@PostMapping("pesquisar")
-	public ConsultaResponse<UsuarioDTO> pesquisar(@RequestBody UsuarioConsultaRequest request) {
+	public ConsultaResponse<DisciplinaDTO> pesquisar(@RequestBody DisciplinaConsultaRequest request) {
 		return this.service.pesquisar(request);
 	}
 }

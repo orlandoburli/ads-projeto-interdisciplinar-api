@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.javafaker.Faker;
 
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.entities.Usuario;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.dto.UsuarioDTO;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.service.UsuarioService;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.exceptions.BusinessException;
 
@@ -16,7 +16,7 @@ public class UsuarioBuilder {
 	private UsuarioService service;
 
 	public void createUsuario() throws BusinessException {
-		final Usuario u = new Usuario();
+		final UsuarioDTO u = new UsuarioDTO();
 
 		final Faker faker = new Faker();
 		u.setNome(faker.name().fullName());

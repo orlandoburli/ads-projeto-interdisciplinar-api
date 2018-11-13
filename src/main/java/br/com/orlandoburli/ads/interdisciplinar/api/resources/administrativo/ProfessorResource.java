@@ -12,32 +12,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.dto.UsuarioDTO;
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.requests.UsuarioConsultaRequest;
-import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.service.UsuarioService;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.dto.ProfessorDTO;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.requests.ProfessorConsultaRequest;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.service.ProfessorService;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.exceptions.BusinessException;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.geral.ConsultaResponse;
 
 @RestController
-@RequestMapping("/usuario/v1")
-public class UsuarioResource {
+@RequestMapping("/professor/v1")
+public class ProfessorResource {
 
 	@Autowired
-	private UsuarioService service;
+	private ProfessorService service;
 
 	@GetMapping("{id}")
-	public Optional<UsuarioDTO> get(@PathVariable Integer id) {
+	public Optional<ProfessorDTO> get(@PathVariable Integer id) {
 		return this.service.get(id);
 	}
 
 	@PostMapping
-	public UsuarioDTO inserir(@RequestBody UsuarioDTO usuario) throws BusinessException {
-		return this.service.insert(usuario);
+	public ProfessorDTO inserir(@RequestBody ProfessorDTO professor) throws BusinessException {
+		return this.service.insert(professor);
 	}
 
 	@PutMapping
-	public UsuarioDTO atualizar(@RequestBody UsuarioDTO usuario) throws BusinessException {
-		return this.service.update(usuario);
+	public ProfessorDTO atualizar(@RequestBody ProfessorDTO professor) throws BusinessException {
+		return this.service.update(professor);
 	}
 
 	@DeleteMapping("{id}")
@@ -46,7 +46,7 @@ public class UsuarioResource {
 	}
 
 	@PostMapping("pesquisar")
-	public ConsultaResponse<UsuarioDTO> pesquisar(@RequestBody UsuarioConsultaRequest request) {
+	public ConsultaResponse<ProfessorDTO> pesquisar(@RequestBody ProfessorConsultaRequest request) {
 		return this.service.pesquisar(request);
 	}
 }
