@@ -36,5 +36,6 @@ jobs:
 
 workflows:
   version: 2
-    jobs: 
-      - build
+    full_build:
+      jobs: 
+        - build
