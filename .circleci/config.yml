@@ -29,7 +29,7 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
         
       # run tests!
-      - run: mvn -e integration-test
+      #- run: mvn -e integration-test
 
       # package
       - run: mvn clean package -Dbuild=$CIRCLE_BUILD_NUM
