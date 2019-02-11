@@ -72,7 +72,7 @@ public class UsuarioBuilder {
 		return retorno;
 	}
 
-	private int randomiza(int n) {
+	public int randomiza(int n) {
 		final int ranNum = (int) (Math.random() * n);
 		return ranNum;
 	}

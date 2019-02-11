@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.builder.ProfessorBuilder;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.administrativo.builder.UsuarioBuilder;
+import br.com.orlandoburli.ads.interdisciplinar.api.model.aluno.builder.AlunoBuilder;
 import br.com.orlandoburli.ads.interdisciplinar.api.model.exceptions.BusinessException;
 
 @RestController
@@ -20,6 +21,9 @@ public class DadosResources {
 	@Autowired
 	private ProfessorBuilder professorBuilder;
 
+	@Autowired
+	private AlunoBuilder alunoBuilder;
+
 	@GetMapping("/usuarios/{quantidade}")
 	public void gerarUsuarios(@PathVariable int quantidade) throws BusinessException {
 		this.usuarioBuilder.createUsuarios(quantidade);
@@ -28,5 +32,10 @@ public class DadosResources {
 	@GetMapping("/professores/{quantidade}")
 	public void gerarProfessores(@PathVariable int quantidade) throws BusinessException {
 		this.professorBuilder.createProfessores(quantidade);
+	}
+
+	@GetMapping("/alunos/{quantidade}")
+	public void gerarAlunos(@PathVariable int quantidade) throws BusinessException {
+		this.alunoBuilder.createAlunos(quantidade);
 	}
 }
